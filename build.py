@@ -40,19 +40,16 @@ def page_shell(active, title, description, body):
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="wordmark" href="index.html">Elaine O'Dea</a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">Menu</label>
+<div class="layout">
+  <aside class="sidebar">
     <nav class="site-nav">
       {nav_html(active)}
     </nav>
-  </div>
-</header>
-<main>
+  </aside>
+  <main>
 {body}
-</main>
+  </main>
+</div>
 <footer class="site-footer">
   <div class="site-footer-inner">
     <span>&copy; 2026 Elaine O'Dea</span>
