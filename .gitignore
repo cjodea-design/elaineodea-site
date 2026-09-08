@@ -1,0 +1,4 @@
+# Full-resolution camera originals — kept locally for archive/future re-export,
+# not needed to serve the site and too large to be worth committing.
+originals/
+.DS_Store
