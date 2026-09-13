@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NCAD Works 2023 — Elaine O'Dea</title>
-<meta name="description" content="NCAD Works, National College of Art and Design, Dublin 8 &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="NCAD Works 2023 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,31 +28,29 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2023</p>
-      <h1>NCAD Works</h1>
+      <h1>NCAD Works 2023</h1>
       <p class="venue">National College of Art and Design, Dublin 8</p>
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/ncad-works-2023/01.jpg" alt="Run &amp; Fell &mdash; fabric, steel, copper, wood, plasterboard, wallpaper, clay, jesmonite (installation view)" loading="lazy">
-        <figcaption>Run &amp; Fell &mdash; fabric, steel, copper, wood, plasterboard, wallpaper, clay, jesmonite (installation view)</figcaption>
-      </figure>
-      <figure>
-        <img src="images/ncad-works-2023/02.jpg" alt="Run &amp; Fell (detail) &mdash; fabric, steel, copper" loading="lazy">
-        <figcaption>Run &amp; Fell (detail) &mdash; fabric, steel, copper</figcaption>
-      </figure>
-      <figure>
-        <img src="images/ncad-works-2023/03.jpg" alt="Run &amp; Fell &mdash; fabric, steel, concrete, copper, clay, jesmonite" loading="lazy">
-        <figcaption>Run &amp; Fell &mdash; fabric, steel, concrete, copper, clay, jesmonite</figcaption>
-      </figure>
-    </div>
+    <section class="work">
+      <h2>Run &amp; Fell</h2><p>Fabric, steel, copper, wood, plasterboard, wallpaper, clay, jesmonite</p>
+      <img src="images/ncad-works-2023/01.jpg" alt="Run &amp; Fell" loading="lazy">
+      <img src="images/ncad-works-2023/02.jpg" alt="Run &amp; Fell" loading="lazy">
+      <img src="images/ncad-works-2023/03.jpg" alt="Run &amp; Fell" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

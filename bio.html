@@ -10,6 +10,7 @@
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html" class="active">Bio</a>
@@ -27,8 +28,7 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">Bio</p>
-      <h1>Elaine O'Dea</h1>
+      <h1>Bio</h1>
     </div>
     <div class="bio">
       <p>Elaine O'Dea is a visual artist living and working in Dublin, Ireland.</p>
@@ -42,40 +42,43 @@
 
       <h2>Education</h2>
       <ul>
-        <li><span class="cv-year">2021&ndash;2023</span> &mdash; Master of Fine Arts, National College of Art and Design, Dublin</li>
-        <li><span class="cv-year">2016&ndash;2019</span> &mdash; Bachelor of Fine Arts with Critical Cultures, National College of Art and Design, Dublin. Sculpture and Expanded Practice &mdash; First Class Honours</li>
-        <li><span class="cv-year">1999&ndash;2000</span> &mdash; Diploma (RHODEC) Interior Design, Portobello Institute, Dublin</li>
-        <li><span class="cv-year">1993&ndash;1994</span> &mdash; Higher Diploma in Education, University College Dublin</li>
-        <li><span class="cv-year">1988&ndash;1991</span> &mdash; Bachelor of Arts &mdash; Economics and Geography, University College Dublin</li>
+        <li class="edu">Master of Fine Arts<br>National College of Art and Design, Dublin<br>2021 &ndash; 2023</li>
+        <li class="edu">Bachelor of Fine Arts with Critical Cultures<br>Sculpture and Expanded Practice &mdash; First Class Honours<br>National College of Art and Design, Dublin<br>2016 &ndash; 2019</li>
+        <li class="edu">Diploma (RHODEC) Interior Design<br>Portobello Institute, Dublin<br>1999 &ndash; 2000</li>
+        <li class="edu">Higher Diploma in Education<br>University College Dublin<br>1993 &ndash; 1994</li>
+        <li class="edu">Bachelor of Arts &mdash; Economics and Geography<br>University College Dublin<br>1988 &ndash; 1991</li>
       </ul>
 
       <h2>Awards</h2>
       <ul>
-        <li><span class="cv-year">2020</span> &mdash; Fire Station Artist's Studio Sculpture Bursary Award</li>
+        <li>Fire Station Artist&rsquo;s Studio Sculpture Bursary Award, 2020</li>
       </ul>
 
       <h2>Group Exhibitions</h2>
       <ul>
-        <li><span class="cv-year">2025</span> &mdash; AMBIT, Signal Arts Centre, Bray, Co. Wicklow</li>
-        <li><span class="cv-year">2025</span> &mdash; Thresholds, Seamus Ennis Arts Centre, Naul, Co. Dublin</li>
-        <li><span class="cv-year">2023</span> &mdash; NCAD Works, Graduate Exhibition, NCAD Annex, Dublin 8</li>
-        <li><span class="cv-year">2022</span> &mdash; Continuum, Irish Georgian Society, Dublin 2</li>
-        <li><span class="cv-year">2022</span> &mdash; Subjective Objects, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2021</span> &mdash; AFFECT, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2020</span> &mdash; Fragility &mdash; Delicate Aspect and Precarious Presentation, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2019</span> &mdash; Sculpture in Context, National Botanic Gardens, Dublin 9</li>
-        <li><span class="cv-year">2019</span> &mdash; NCAD Works, Graduate Exhibition, NCAD, Dublin 8</li>
-        <li><span class="cv-year">2018</span> &mdash; Sculpture in Context, National Botanic Gardens, Dublin 9</li>
-        <li><span class="cv-year">2018</span> &mdash; Disjunction, Eblana House, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2025</span>AMBIT<br>Signal Arts Centre, Bray, Co. Wicklow<br><br>Thresholds<br>Seamus Ennis Arts Centre, Naul, Co. Dublin</li>
+        <li class="edu"><span class="ex-year">2023</span>NCAD Works, Graduate Exhibition<br>NCAD Annex, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2022</span>Continuum<br>Irish Georgian Society, Dublin 2<br><br>Subjective Objects<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2021</span>AFFECT<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2020</span>Fragility &mdash; Delicate Aspect and Precarious Presentation<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2019</span>Sculpture in Context<br>National Botanic Gardens, Dublin 9<br><br>NCAD Works, Graduate Exhibition<br>NCAD, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2018</span>Sculpture in Context<br>National Botanic Gardens, Dublin 9<br><br>Disjunction<br>Eblana House, Dublin 8</li>
       </ul>
     </div>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

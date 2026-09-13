@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thresholds 2025 — Elaine O'Dea</title>
-<meta name="description" content="Thresholds, The Seamus Ennis Art Centre &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="Thresholds 2025 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,62 +28,55 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2025</p>
-      <h1>Thresholds</h1>
-      <p class="venue">The Seamus Ennis Art Centre</p>
+      <h1>Thresholds 2025</h1>
+      <p class="venue">The Seamus Ennis Arts Centre</p>
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/thresholds-2025/01.jpg" alt="thresholds-2025 artwork 1" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/02.jpg" alt="thresholds-2025 artwork 2" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/03.jpg" alt="thresholds-2025 artwork 3" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/04.jpg" alt="thresholds-2025 artwork 4" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/05.jpg" alt="thresholds-2025 artwork 5" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/06.jpg" alt="thresholds-2025 artwork 6" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/07.jpg" alt="thresholds-2025 artwork 7" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/08.jpg" alt="thresholds-2025 artwork 8" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/09.jpg" alt="thresholds-2025 artwork 9" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/10.jpg" alt="thresholds-2025 artwork 10" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/thresholds-2025/11.jpg" alt="thresholds-2025 artwork 11" loading="lazy">
-      </figure>
+    <div class="slider-wrap">
+      <button class="slider-btn prev" aria-label="Previous">&lsaquo;</button>
+      <div class="slider">
+        <img src="images/thresholds-2025/01.jpg" alt="Thresholds 2025" loading="lazy">
+        <img src="images/thresholds-2025/02.jpg" alt="Thresholds 2025" loading="lazy">
+        <img src="images/thresholds-2025/03.jpg" alt="Thresholds 2025" loading="lazy">
+        <img src="images/thresholds-2025/10.jpg" alt="Thresholds 2025" loading="lazy">
+        <img src="images/thresholds-2025/11.jpg" alt="Thresholds 2025" loading="lazy">
+      </div>
+      <button class="slider-btn next" aria-label="Next">&rsaquo;</button>
     </div>
-    <div class="works">
-      <h2>Works shown</h2>
-      <ul>
-      <li><span class="work-title">Castings</span> — Jesmonite, iron filings, wire mesh, copper</li>
-      <li><span class="work-title">Cast #1&ndash;#7</span> — Jesmonite, iron filings, wire mesh, copper</li>
-      <li><span class="work-title">Cast Form #1</span> — Jesmonite</li>
-      <li><span class="work-title">EndoCast</span> — Jesmonite</li>
-      <li><span class="work-title">Cast Form #2</span> — Jesmonite</li>
-      </ul>
-    </div>
+    <section class="work">
+      <h2>Castings</h2><p>Jesmonite, Iron filings, Wire Mesh, Copper</p>
+      <img src="images/thresholds-2025/04.jpg" alt="Castings" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Cast #1&ndash;#7</h2><p>Jesmonite, Iron filings, Wire Mesh, Copper</p>
+      <img src="images/thresholds-2025/05.jpg" alt="Cast #1&ndash;#7" loading="lazy">
+      <img src="images/thresholds-2025/06.jpg" alt="Cast #1&ndash;#7" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Cast Form #1</h2><p>Jesmonite</p>
+      <img src="images/thresholds-2025/07.jpg" alt="Cast Form #1" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>EndoCast</h2><p>Jesmonite</p>
+      <img src="images/thresholds-2025/08.jpg" alt="EndoCast" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Cast Form #2</h2><p>Jesmonite</p>
+      <img src="images/thresholds-2025/09.jpg" alt="Cast Form #2" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

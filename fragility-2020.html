@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fragility 2020 — Elaine O'Dea</title>
-<meta name="description" content="Fragility: Delicate Aspect and Precarious Presentation, BKB Visual Art Studios &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="Fragility 2020 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,35 +28,35 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2020</p>
-      <h1>Fragility: Delicate Aspect and Precarious Presentation</h1>
-      <p class="venue">BKB Visual Art Studios</p>
+      <h1>Fragility:<br>Delicate Aspect and Precarious Presentation</h1>
+      <p class="venue">2020</p><p class="venue">BKB Visual Art studios</p>
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/fragility-2020/01.jpg" alt="fragility-2020 artwork 1" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/fragility-2020/02.jpg" alt="fragility-2020 artwork 2" loading="lazy">
-      </figure>
-      <figure>
-        <img src="images/fragility-2020/03.jpg" alt="fragility-2020 artwork 3" loading="lazy">
-      </figure>
-    </div>
-    <div class="works">
-      <h2>Works shown</h2>
-      <ul>
-      <li><span class="work-title">The Bough</span> — Steel, plaster, resin, iron filings, 150 &times; 40 &times; 30cm</li>
-      <li><span class="work-title">Sticks and Stones</span> — Copper pipe, plaster, rubber</li>
-      </ul>
-    </div>
+    <section class="work">
+      
+      <img src="images/fragility-2020/01.jpg" alt="fragility-2020" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>The Bough</h2><p>Steel, plaster, resin, iron filings</p><p>150 x 40 x 30cm</p>
+      <img src="images/fragility-2020/02.jpg" alt="The Bough" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Sticks and Stones</h2><p>Copper pipe, plaster, rubber</p>
+      <img src="images/fragility-2020/03.jpg" alt="Sticks and Stones" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

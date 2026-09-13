@@ -42,6 +42,7 @@ def page_shell(active, title, description, body):
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       {nav_html(active)}
     </nav>
@@ -52,56 +53,60 @@ def page_shell(active, title, description, body):
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){{
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){{s.scrollBy({{left:-s.clientWidth*0.8,behavior:'smooth'}});}};
+  w.querySelector('.next').onclick=function(){{s.scrollBy({{left:s.clientWidth*0.8,behavior:'smooth'}});}};
+}});
+</script>
 </body>
 </html>
 """
 
-def gallery_captioned(slug, count, captions):
-    figs = []
-    for i in range(1, count + 1):
-        cap = captions[i - 1] if i - 1 < len(captions) else ""
-        figs.append(f"""      <figure>
-        <img src="images/{slug}/{i:02d}.jpg" alt="{cap}" loading="lazy">
-        <figcaption>{cap}</figcaption>
-      </figure>""")
-    return '    <div class="gallery">\n' + "\n".join(figs) + "\n    </div>"
+def img(slug, i, alt):
+    return f'<img src="images/{slug}/{i:02d}.jpg" alt="{alt}" loading="lazy">'
 
-def gallery_grouped(slug, count):
-    figs = []
-    for i in range(1, count + 1):
-        figs.append(f"""      <figure>
-        <img src="images/{slug}/{i:02d}.jpg" alt="{slug} artwork {i}" loading="lazy">
-      </figure>""")
-    return '    <div class="gallery">\n' + "\n".join(figs) + "\n    </div>"
-
-def works_list(items):
-    lis = "\n".join(f'      <li><span class="work-title">{t}</span> — {m}</li>' for t, m in items)
-    return f"""    <div class="works">
-      <h2>Works shown</h2>
-      <ul>
-{lis}
-      </ul>
+def slider_html(slug, indices, alt):
+    if not indices:
+        return ""
+    imgs = "\n        ".join(img(slug, i, alt) for i in indices)
+    return f"""    <div class="slider-wrap">
+      <button class="slider-btn prev" aria-label="Previous">&lsaquo;</button>
+      <div class="slider">
+        {imgs}
+      </div>
+      <button class="slider-btn next" aria-label="Next">&rsaquo;</button>
     </div>"""
 
-def page_head(eyebrow, heading, venue):
-    venue_html = f'<p class="venue">{venue}</p>' if venue else ""
+def work_sections_html(slug, sections):
+    out = []
+    for title, materials, indices in sections:
+        head = f"<h2>{title}</h2>" if title else ""
+        mats = "".join(f"<p>{m}</p>" for m in materials)
+        imgs = "\n      ".join(img(slug, i, title or slug) for i in indices)
+        out.append(f"""    <section class="work">
+      {head}{mats}
+      {imgs}
+    </section>""")
+    return "\n".join(out)
+
+def page_head(heading, sub=()):
+    subs = "".join(f'<p class="venue">{s}</p>' for s in sub)
     return f"""    <div class="page-head">
-      <p class="eyebrow">{eyebrow}</p>
       <h1>{heading}</h1>
-      {venue_html}
+      {subs}
     </div>"""
 
 # ---------- HOME ----------
-home_body = f"""{page_head("Sculpture & material", "Elaine O'Dea", "Dublin, Ireland")}
-    <div class="hero">
+home_body = """    <div class="hero">
       <figure>
         <img src="images/home/01.jpg" alt="Elaine O'Dea, sculpture work" loading="eager">
       </figure>
-      <p class="hero-caption">Elaine O'Dea explores the boundaries between body and surroundings through cast and constructed sculpture.</p>
     </div>"""
 open(os.path.join(ROOT, "index.html"), "w").write(
     page_shell("index", "Home", SITE_DESC, home_body)
@@ -109,8 +114,7 @@ open(os.path.join(ROOT, "index.html"), "w").write(
 
 # ---------- BIO ----------
 bio_body = """    <div class="page-head">
-      <p class="eyebrow">Bio</p>
-      <h1>Elaine O'Dea</h1>
+      <h1>Bio</h1>
     </div>
     <div class="bio">
       <p>Elaine O'Dea is a visual artist living and working in Dublin, Ireland.</p>
@@ -124,31 +128,27 @@ bio_body = """    <div class="page-head">
 
       <h2>Education</h2>
       <ul>
-        <li><span class="cv-year">2021&ndash;2023</span> &mdash; Master of Fine Arts, National College of Art and Design, Dublin</li>
-        <li><span class="cv-year">2016&ndash;2019</span> &mdash; Bachelor of Fine Arts with Critical Cultures, National College of Art and Design, Dublin. Sculpture and Expanded Practice &mdash; First Class Honours</li>
-        <li><span class="cv-year">1999&ndash;2000</span> &mdash; Diploma (RHODEC) Interior Design, Portobello Institute, Dublin</li>
-        <li><span class="cv-year">1993&ndash;1994</span> &mdash; Higher Diploma in Education, University College Dublin</li>
-        <li><span class="cv-year">1988&ndash;1991</span> &mdash; Bachelor of Arts &mdash; Economics and Geography, University College Dublin</li>
+        <li class="edu">Master of Fine Arts<br>National College of Art and Design, Dublin<br>2021 &ndash; 2023</li>
+        <li class="edu">Bachelor of Fine Arts with Critical Cultures<br>Sculpture and Expanded Practice &mdash; First Class Honours<br>National College of Art and Design, Dublin<br>2016 &ndash; 2019</li>
+        <li class="edu">Diploma (RHODEC) Interior Design<br>Portobello Institute, Dublin<br>1999 &ndash; 2000</li>
+        <li class="edu">Higher Diploma in Education<br>University College Dublin<br>1993 &ndash; 1994</li>
+        <li class="edu">Bachelor of Arts &mdash; Economics and Geography<br>University College Dublin<br>1988 &ndash; 1991</li>
       </ul>
 
       <h2>Awards</h2>
       <ul>
-        <li><span class="cv-year">2020</span> &mdash; Fire Station Artist's Studio Sculpture Bursary Award</li>
+        <li>Fire Station Artist&rsquo;s Studio Sculpture Bursary Award, 2020</li>
       </ul>
 
       <h2>Group Exhibitions</h2>
       <ul>
-        <li><span class="cv-year">2025</span> &mdash; AMBIT, Signal Arts Centre, Bray, Co. Wicklow</li>
-        <li><span class="cv-year">2025</span> &mdash; Thresholds, Seamus Ennis Arts Centre, Naul, Co. Dublin</li>
-        <li><span class="cv-year">2023</span> &mdash; NCAD Works, Graduate Exhibition, NCAD Annex, Dublin 8</li>
-        <li><span class="cv-year">2022</span> &mdash; Continuum, Irish Georgian Society, Dublin 2</li>
-        <li><span class="cv-year">2022</span> &mdash; Subjective Objects, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2021</span> &mdash; AFFECT, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2020</span> &mdash; Fragility &mdash; Delicate Aspect and Precarious Presentation, BKB Visual Art Studios, Dublin 9</li>
-        <li><span class="cv-year">2019</span> &mdash; Sculpture in Context, National Botanic Gardens, Dublin 9</li>
-        <li><span class="cv-year">2019</span> &mdash; NCAD Works, Graduate Exhibition, NCAD, Dublin 8</li>
-        <li><span class="cv-year">2018</span> &mdash; Sculpture in Context, National Botanic Gardens, Dublin 9</li>
-        <li><span class="cv-year">2018</span> &mdash; Disjunction, Eblana House, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2025</span>AMBIT<br>Signal Arts Centre, Bray, Co. Wicklow<br><br>Thresholds<br>Seamus Ennis Arts Centre, Naul, Co. Dublin</li>
+        <li class="edu"><span class="ex-year">2023</span>NCAD Works, Graduate Exhibition<br>NCAD Annex, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2022</span>Continuum<br>Irish Georgian Society, Dublin 2<br><br>Subjective Objects<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2021</span>AFFECT<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2020</span>Fragility &mdash; Delicate Aspect and Precarious Presentation<br>BKB Visual Art Studios, Dublin 9</li>
+        <li class="edu"><span class="ex-year">2019</span>Sculpture in Context<br>National Botanic Gardens, Dublin 9<br><br>NCAD Works, Graduate Exhibition<br>NCAD, Dublin 8</li>
+        <li class="edu"><span class="ex-year">2018</span>Sculpture in Context<br>National Botanic Gardens, Dublin 9<br><br>Disjunction<br>Eblana House, Dublin 8</li>
       </ul>
     </div>"""
 open(os.path.join(ROOT, "bio.html"), "w").write(
@@ -158,71 +158,64 @@ open(os.path.join(ROOT, "bio.html"), "w").write(
 # ---------- GALLERY PAGES ----------
 galleries = {
     "thresholds-2025": dict(
-        eyebrow="2025", heading="Thresholds", venue="The Seamus Ennis Art Centre",
-        mode="grouped", count=11,
-        works=[
-            ("Castings", "Jesmonite, iron filings, wire mesh, copper"),
-            ("Cast #1&ndash;#7", "Jesmonite, iron filings, wire mesh, copper"),
-            ("Cast Form #1", "Jesmonite"),
-            ("EndoCast", "Jesmonite"),
-            ("Cast Form #2", "Jesmonite"),
+        heading="Thresholds 2025", sub=["The Seamus Ennis Arts Centre"], slider=[1, 2, 3, 10, 11],
+        sections=[
+            ("Castings", ["Jesmonite, Iron filings, Wire Mesh, Copper"], [4]),
+            ("Cast #1&ndash;#7", ["Jesmonite, Iron filings, Wire Mesh, Copper"], [5, 6]),
+            ("Cast Form #1", ["Jesmonite"], [7]),
+            ("EndoCast", ["Jesmonite"], [8]),
+            ("Cast Form #2", ["Jesmonite"], [9]),
         ],
     ),
     "ncad-works-2023": dict(
-        eyebrow="2023", heading="NCAD Works", venue="National College of Art and Design, Dublin 8",
-        mode="captioned", count=3,
-        captions=[
-            "Run &amp; Fell &mdash; fabric, steel, copper, wood, plasterboard, wallpaper, clay, jesmonite (installation view)",
-            "Run &amp; Fell (detail) &mdash; fabric, steel, copper",
-            "Run &amp; Fell &mdash; fabric, steel, concrete, copper, clay, jesmonite",
+        heading="NCAD Works 2023", sub=["National College of Art and Design, Dublin 8"],
+        sections=[
+            ("Run &amp; Fell", ["Fabric, steel, copper, wood, plasterboard, wallpaper, clay, jesmonite"], [1, 2, 3]),
         ],
     ),
     "continuum-2022": dict(
-        eyebrow="2022", heading="Continuum", venue="Irish Georgian Society, Dublin 2",
-        mode="captioned", count=3,
-        captions=["Inside/Out &mdash; steel, latex, jesmonite"] * 3,
+        heading="Continuum 2022", sub=["Irish Georgian Society, Dublin 2"],
+        sections=[
+            ("", [], [1]),
+            ("Inside/Out", ["Steel, latex, jesmonite"], [2]),
+            ("Inside/Out", ["Steel, latex, jesmonite"], [3]),
+        ],
     ),
     "subjective-objects-2022": dict(
-        eyebrow="2022", heading="Subjective Objects", venue="BKB Visual Art Studios",
-        mode="captioned", count=2,
-        captions=["Nexus I &amp; II &mdash; copper, aluminium, 40 &times; 40 &times; 40cm"] * 2,
+        heading="Subjective Objects", sub=["2022"],
+        sections=[("Nexus I &amp; II", ["Copper, aluminium", "40 x 40 x 40cm"], [1, 2])],
     ),
     "if-walls-could-talk-2021": dict(
-        eyebrow="2021", heading="If Walls Could Talk", venue="National College of Art and Design, Dublin 8",
-        mode="captioned", count=3,
-        captions=["If Walls Could Talk &mdash; copper, aluminium, perspex, 200 &times; 220 &times; 300cm (audio work)"] * 3,
+        heading="If Walls Could Talk 2021",
+        sections=[("If Walls Could Talk", ["Copper, aluminium, perspex", "200 x 220 x 300cm"], [1, 2, 3])],
     ),
     "fragility-2020": dict(
-        eyebrow="2020", heading="Fragility: Delicate Aspect and Precarious Presentation", venue="BKB Visual Art Studios",
-        mode="grouped", count=3,
-        works=[
-            ("The Bough", "Steel, plaster, resin, iron filings, 150 &times; 40 &times; 30cm"),
-            ("Sticks and Stones", "Copper pipe, plaster, rubber"),
+        heading="Fragility:<br>Delicate Aspect and Precarious Presentation", sub=["2020", "BKB Visual Art studios"],
+        sections=[
+            ("", [], [1]),
+            ("The Bough", ["Steel, plaster, resin, iron filings", "150 x 40 x 30cm"], [2]),
+            ("Sticks and Stones", ["Copper pipe, plaster, rubber"], [3]),
         ],
     ),
     "ncad-works-2019": dict(
-        eyebrow="2019", heading="NCAD Grad Show", venue="National College of Art and Design, Dublin 8",
-        mode="captioned", count=3,
-        captions=[
-            "Upstand / Overcome / Underpin &mdash; mild steel, plaster (installation view)",
-            "Overcome &mdash; mild steel, plaster, 200 &times; 90 &times; 20cm",
-            "Upstand &mdash; mild steel, plaster, 165 &times; 50 &times; 50cm",
+        heading="NCAD Grad Show 2019",
+        sections=[
+            ("Upstand/Overcome/Underpin", ["Mild steel, plaster"], [1]),
+            ("Overcome", ["Mild steel, plaster", "200 x 90 x 20cm"], [2]),
+            ("Upstand", ["Mild steel, plaster", "165 x 50 x 50cm"], [3]),
         ],
     ),
     "sculpture-in-context-2019": dict(
-        eyebrow="2019", heading="Sculpture in Context", venue="National Botanic Gardens, Dublin",
-        mode="captioned", count=1,
-        captions=["Overcome II &mdash; steel, chrome, plaster, resin, chain, 90 &times; 60 &times; 30cm"],
+        heading="Sculpture in Context", sub=["2019", "National Botanic Gardens, Dublin"],
+        sections=[("Overcome II", ["Steel, chrome, plaster, resin, chain", "90 x 60 x 30cm"], [1])],
     ),
     "colour-is-dangerous-2018": dict(
-        eyebrow="2018", heading="Colour is Dangerous", venue="National College of Art and Design, Dublin 8",
-        mode="captioned", count=2,
-        captions=["Colour is Dangerous &mdash; resin, aluminium cages (30 &times; 30cm), spotlights, chain"] * 2,
+        heading="NCAD 2018",
+        sections=[("Colour is Dangerous", ["Resin, aluminium cages (30 x 30cm), spotlights, chain"], [1, 2])],
     ),
     "gentle-persuasion-2018": dict(
-        eyebrow="2018", heading="Disjunction", venue="Eblana House, Dublin 8",
-        mode="captioned", count=2,
-        captions=["Gentle Persuasion &mdash; plaster board, wooden frame, ratchet strap, paint"] * 2,
+        heading="Disjunction", sub=["Eblana House, Dublin 8"],
+        sections=[("Gentle Persuasion", ["Plaster board, wooden frame, ratchet strap, paint"], [1, 2])],
     ),
 }
 
@@ -230,14 +223,12 @@ for slug, nav_label in PAGES:
     if slug not in galleries:
         continue
     g = galleries[slug]
-    body_parts = [page_head(g["eyebrow"], g["heading"], g["venue"])]
-    if g["mode"] == "captioned":
-        body_parts.append(gallery_captioned(slug, g["count"], g["captions"]))
-    else:
-        body_parts.append(gallery_grouped(slug, g["count"]))
-        body_parts.append(works_list(g["works"]))
-    body = "\n".join(body_parts)
-    desc = f"{g['heading']}, {g['venue']} &mdash; sculpture by Elaine O'Dea."
+    body = "\n".join(p for p in [
+        page_head(g["heading"], g.get("sub", ())),
+        slider_html(slug, g.get("slider"), g["heading"]),
+        work_sections_html(slug, g["sections"]),
+    ] if p)
+    desc = f"{nav_label} &mdash; sculpture by Elaine O'Dea."
     open(os.path.join(ROOT, f"{slug}.html"), "w").write(
         page_shell(slug, nav_label, desc, body)
     )

@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Subjective Objects 2022 — Elaine O'Dea</title>
-<meta name="description" content="Subjective Objects, BKB Visual Art Studios &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="Subjective Objects 2022 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,27 +28,28 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2022</p>
       <h1>Subjective Objects</h1>
-      <p class="venue">BKB Visual Art Studios</p>
+      <p class="venue">2022</p>
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/subjective-objects-2022/01.jpg" alt="Nexus I &amp; II &mdash; copper, aluminium, 40 &times; 40 &times; 40cm" loading="lazy">
-        <figcaption>Nexus I &amp; II &mdash; copper, aluminium, 40 &times; 40 &times; 40cm</figcaption>
-      </figure>
-      <figure>
-        <img src="images/subjective-objects-2022/02.jpg" alt="Nexus I &amp; II &mdash; copper, aluminium, 40 &times; 40 &times; 40cm" loading="lazy">
-        <figcaption>Nexus I &amp; II &mdash; copper, aluminium, 40 &times; 40 &times; 40cm</figcaption>
-      </figure>
-    </div>
+    <section class="work">
+      <h2>Nexus I &amp; II</h2><p>Copper, aluminium</p><p>40 x 40 x 40cm</p>
+      <img src="images/subjective-objects-2022/01.jpg" alt="Nexus I &amp; II" loading="lazy">
+      <img src="images/subjective-objects-2022/02.jpg" alt="Nexus I &amp; II" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

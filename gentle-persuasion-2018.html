@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gentle Persuasion 2018 — Elaine O'Dea</title>
-<meta name="description" content="Disjunction, Eblana House, Dublin 8 &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="Gentle Persuasion 2018 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,27 +28,28 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2018</p>
       <h1>Disjunction</h1>
       <p class="venue">Eblana House, Dublin 8</p>
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/gentle-persuasion-2018/01.jpg" alt="Gentle Persuasion &mdash; plaster board, wooden frame, ratchet strap, paint" loading="lazy">
-        <figcaption>Gentle Persuasion &mdash; plaster board, wooden frame, ratchet strap, paint</figcaption>
-      </figure>
-      <figure>
-        <img src="images/gentle-persuasion-2018/02.jpg" alt="Gentle Persuasion &mdash; plaster board, wooden frame, ratchet strap, paint" loading="lazy">
-        <figcaption>Gentle Persuasion &mdash; plaster board, wooden frame, ratchet strap, paint</figcaption>
-      </figure>
-    </div>
+    <section class="work">
+      <h2>Gentle Persuasion</h2><p>Plaster board, wooden frame, ratchet strap, paint</p>
+      <img src="images/gentle-persuasion-2018/01.jpg" alt="Gentle Persuasion" loading="lazy">
+      <img src="images/gentle-persuasion-2018/02.jpg" alt="Gentle Persuasion" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

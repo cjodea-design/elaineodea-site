@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NCAD Works 2019 — Elaine O'Dea</title>
-<meta name="description" content="NCAD Grad Show, National College of Art and Design, Dublin 8 &mdash; sculpture by Elaine O'Dea.">
+<meta name="description" content="NCAD Works 2019 &mdash; sculpture by Elaine O'Dea.">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="bio.html">Bio</a>
@@ -27,31 +28,35 @@
   </aside>
   <main>
     <div class="page-head">
-      <p class="eyebrow">2019</p>
-      <h1>NCAD Grad Show</h1>
-      <p class="venue">National College of Art and Design, Dublin 8</p>
+      <h1>NCAD Grad Show 2019</h1>
+      
     </div>
-    <div class="gallery">
-      <figure>
-        <img src="images/ncad-works-2019/01.jpg" alt="Upstand / Overcome / Underpin &mdash; mild steel, plaster (installation view)" loading="lazy">
-        <figcaption>Upstand / Overcome / Underpin &mdash; mild steel, plaster (installation view)</figcaption>
-      </figure>
-      <figure>
-        <img src="images/ncad-works-2019/02.jpg" alt="Overcome &mdash; mild steel, plaster, 200 &times; 90 &times; 20cm" loading="lazy">
-        <figcaption>Overcome &mdash; mild steel, plaster, 200 &times; 90 &times; 20cm</figcaption>
-      </figure>
-      <figure>
-        <img src="images/ncad-works-2019/03.jpg" alt="Upstand &mdash; mild steel, plaster, 165 &times; 50 &times; 50cm" loading="lazy">
-        <figcaption>Upstand &mdash; mild steel, plaster, 165 &times; 50 &times; 50cm</figcaption>
-      </figure>
-    </div>
+    <section class="work">
+      <h2>Upstand/Overcome/Underpin</h2><p>Mild steel, plaster</p>
+      <img src="images/ncad-works-2019/01.jpg" alt="Upstand/Overcome/Underpin" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Overcome</h2><p>Mild steel, plaster</p><p>200 x 90 x 20cm</p>
+      <img src="images/ncad-works-2019/02.jpg" alt="Overcome" loading="lazy">
+    </section>
+    <section class="work">
+      <h2>Upstand</h2><p>Mild steel, plaster</p><p>165 x 50 x 50cm</p>
+      <img src="images/ncad-works-2019/03.jpg" alt="Upstand" loading="lazy">
+    </section>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>

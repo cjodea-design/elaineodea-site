@@ -10,6 +10,7 @@
 <body>
 <div class="layout">
   <aside class="sidebar">
+    <a class="site-name" href="index.html">Elaine<br>O'Dea</a>
     <nav class="site-nav">
       <a href="index.html" class="active">Home</a>
       <a href="bio.html">Bio</a>
@@ -26,24 +27,25 @@
     </nav>
   </aside>
   <main>
-    <div class="page-head">
-      <p class="eyebrow">Sculpture & material</p>
-      <h1>Elaine O'Dea</h1>
-      <p class="venue">Dublin, Ireland</p>
-    </div>
     <div class="hero">
       <figure>
         <img src="images/home/01.jpg" alt="Elaine O'Dea, sculpture work" loading="eager">
       </figure>
-      <p class="hero-caption">Elaine O'Dea explores the boundaries between body and surroundings through cast and constructed sculpture.</p>
     </div>
   </main>
 </div>
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <span>&copy; 2026 Elaine O'Dea</span>
+    <span>&copy; 2020 by Elaine O'Dea.</span>
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.slider-wrap').forEach(function(w){
+  var s=w.querySelector('.slider');
+  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
+  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
+});
+</script>
 </body>
 </html>
