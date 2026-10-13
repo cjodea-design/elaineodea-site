@@ -58,13 +58,6 @@ def page_shell(active, title, description, body):
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
-<script>
-document.querySelectorAll('.slider-wrap').forEach(function(w){{
-  var s=w.querySelector('.slider');
-  w.querySelector('.prev').onclick=function(){{s.scrollBy({{left:-s.clientWidth*0.8,behavior:'smooth'}});}};
-  w.querySelector('.next').onclick=function(){{s.scrollBy({{left:s.clientWidth*0.8,behavior:'smooth'}});}};
-}});
-</script>
 </body>
 </html>
 """
@@ -72,17 +65,35 @@ document.querySelectorAll('.slider-wrap').forEach(function(w){{
 def img(slug, i, alt):
     return f'<img src="images/{slug}/{i:02d}.jpg" alt="{alt}" loading="lazy">'
 
-def slider_html(slug, indices, alt):
-    if not indices:
-        return ""
-    imgs = "\n        ".join(img(slug, i, alt) for i in indices)
-    return f"""    <div class="slider-wrap">
-      <button class="slider-btn prev" aria-label="Previous">&lsaquo;</button>
-      <div class="slider">
-        {imgs}
+def thresholds_body(slug):
+    """Layout traced from the live Wix page: hero image with its caption to the
+    right; the seven casts as a uniform grid (a horizontal strip on Wix);
+    then a two-column block — EndoCast on the left, Cast Form #1 and #2
+    stacked on the right — each captioned beneath its image."""
+    cap = lambda t, m: f'<div class="caption"><h2>{t}</h2><p>{m}</p></div>'
+    strip = "\n        ".join(img(slug, i, "Cast #1\u2013#7") for i in range(2, 9))
+    return f"""    <section class="th-hero">
+      {img(slug, 1, "Castings")}
+      {cap("Castings", "Jesmonite, Iron filings,<br>Wire mesh, Copper")}
+    </section>
+    <section class="th-strip">
+      <div class="th-grid">
+        {strip}
       </div>
-      <button class="slider-btn next" aria-label="Next">&rsaquo;</button>
-    </div>"""
+      {cap("Cast #1&ndash; #7", "Jesmonite, Iron filings, Wire Mesh, Copper")}
+    </section>
+    <section class="th-pair">
+      <div class="th-col">
+        {img(slug, 9, "EndoCast")}
+        {cap("EndoCast", "Jesmonite")}
+      </div>
+      <div class="th-col th-col-narrow">
+        {img(slug, 10, "Cast Form #1")}
+        {cap("Cast Form #1", "Jesmonite")}
+        {img(slug, 11, "Cast Form #2")}
+        {cap("Cast Form #2", "Jesmonite")}
+      </div>
+    </section>"""
 
 def work_sections_html(slug, sections, captions_below=False):
     out = []
@@ -181,14 +192,7 @@ galleries = {
         ],
     ),
     "thresholds-2025": dict(
-        heading="Thresholds 2025", sub=["The Seamus Ennis Arts Centre"], slider=[1, 2, 3, 10, 11],
-        sections=[
-            ("Castings", ["Jesmonite, Iron filings, Wire Mesh, Copper"], [4]),
-            ("Cast #1&ndash;#7", ["Jesmonite, Iron filings, Wire Mesh, Copper"], [5, 6]),
-            ("Cast Form #1", ["Jesmonite"], [7]),
-            ("EndoCast", ["Jesmonite"], [8]),
-            ("Cast Form #2", ["Jesmonite"], [9]),
-        ],
+        heading="Thresholds 2025", sub=["The Seamus Ennis Art Centre"], custom=thresholds_body,
     ),
     "ncad-works-2023": dict(
         heading="NCAD Works 2023", sub=["National College of Art and Design, Dublin 8"],
@@ -248,7 +252,7 @@ for slug, nav_label in PAGES:
     g = galleries[slug]
     body = "\n".join(p for p in [
         page_head(g["heading"], g.get("sub", ())),
-        slider_html(slug, g.get("slider"), g["heading"]),
+        g["custom"](slug) if "custom" in g else
         work_sections_html(slug, g["sections"], g.get("captions_below", False)),
     ] if p)
     desc = f"{nav_label} &mdash; sculpture by Elaine O'Dea."

@@ -128,44 +128,38 @@ main{
   margin:0;
 }
 
-/* ---- Slider ---- */
-.slider-wrap{
-  position:relative;
-  margin-bottom:56px;
+/* ---- Thresholds 2025 (traced from the Wix layout) ---- */
+.th-hero,.th-strip,.th-pair{margin-bottom:56px;}
+.th-hero{
+  display:grid;
+  grid-template-columns:minmax(0,500px) 1fr;
+  gap:16px;
+  align-items:end;
+  padding-left:16%;
 }
-.slider{
-  display:flex;
-  gap:12px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
+.th-hero img{width:100%;height:auto;}
+.th-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
-.slider::-webkit-scrollbar{display:none;}
-.slider img{
-  height:500px;
-  width:auto;
-  max-width:none;
-  flex:none;
-  scroll-snap-align:start;
+.th-grid img{width:100%;aspect-ratio:3/4;object-fit:cover;}
+.th-pair{
+  display:grid;
+  grid-template-columns:3fr 2fr;
+  gap:36px;
+  align-items:start;
 }
+.th-col img{width:100%;height:auto;}
+.th-col img + .caption + img{margin-top:36px;}
+.caption{margin-top:14px;}
+.caption h2{font-family:var(--brandon);font-weight:700;font-size:20px;line-height:1.4;color:var(--ink);margin:0 0 4px;}
+.caption p{margin:0;font-size:15px;color:var(--ink-soft);}
 @media (max-width: 780px){
-  .slider img{height:320px;}
+  .th-hero{grid-template-columns:1fr;padding-left:0;}
+  .th-grid{grid-template-columns:repeat(2,1fr);}
+  .th-pair{grid-template-columns:1fr;}
 }
-.slider-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  border:0;
-  background:rgba(255,255,255,.75);
-  color:var(--ink);
-  font-size:36px;
-  line-height:1;
-  width:40px;
-  height:56px;
-  cursor:pointer;
-}
-.slider-btn.prev{left:0;}
-.slider-btn.next{right:0;}
 
 /* ---- Work sections ---- */
 .work{

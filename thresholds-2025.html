@@ -30,39 +30,35 @@
   <main>
     <div class="page-head">
       <h1>Thresholds 2025</h1>
-      <p class="venue">The Seamus Ennis Arts Centre</p>
+      <p class="venue">The Seamus Ennis Art Centre</p>
     </div>
-    <div class="slider-wrap">
-      <button class="slider-btn prev" aria-label="Previous">&lsaquo;</button>
-      <div class="slider">
-        <img src="images/thresholds-2025/01.jpg" alt="Thresholds 2025" loading="lazy">
-        <img src="images/thresholds-2025/02.jpg" alt="Thresholds 2025" loading="lazy">
-        <img src="images/thresholds-2025/03.jpg" alt="Thresholds 2025" loading="lazy">
-        <img src="images/thresholds-2025/10.jpg" alt="Thresholds 2025" loading="lazy">
-        <img src="images/thresholds-2025/11.jpg" alt="Thresholds 2025" loading="lazy">
+    <section class="th-hero">
+      <img src="images/thresholds-2025/01.jpg" alt="Castings" loading="lazy">
+      <div class="caption"><h2>Castings</h2><p>Jesmonite, Iron filings,<br>Wire mesh, Copper</p></div>
+    </section>
+    <section class="th-strip">
+      <div class="th-grid">
+        <img src="images/thresholds-2025/02.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/03.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/04.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/05.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/06.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/07.jpg" alt="Cast #1–#7" loading="lazy">
+        <img src="images/thresholds-2025/08.jpg" alt="Cast #1–#7" loading="lazy">
       </div>
-      <button class="slider-btn next" aria-label="Next">&rsaquo;</button>
-    </div>
-    <section class="work">
-      <h2>Castings</h2><p>Jesmonite, Iron filings, Wire Mesh, Copper</p>
-      <img src="images/thresholds-2025/04.jpg" alt="Castings" loading="lazy">
+      <div class="caption"><h2>Cast #1&ndash; #7</h2><p>Jesmonite, Iron filings, Wire Mesh, Copper</p></div>
     </section>
-    <section class="work">
-      <h2>Cast #1&ndash;#7</h2><p>Jesmonite, Iron filings, Wire Mesh, Copper</p>
-      <img src="images/thresholds-2025/05.jpg" alt="Cast #1&ndash;#7" loading="lazy">
-      <img src="images/thresholds-2025/06.jpg" alt="Cast #1&ndash;#7" loading="lazy">
-    </section>
-    <section class="work">
-      <h2>Cast Form #1</h2><p>Jesmonite</p>
-      <img src="images/thresholds-2025/07.jpg" alt="Cast Form #1" loading="lazy">
-    </section>
-    <section class="work">
-      <h2>EndoCast</h2><p>Jesmonite</p>
-      <img src="images/thresholds-2025/08.jpg" alt="EndoCast" loading="lazy">
-    </section>
-    <section class="work">
-      <h2>Cast Form #2</h2><p>Jesmonite</p>
-      <img src="images/thresholds-2025/09.jpg" alt="Cast Form #2" loading="lazy">
+    <section class="th-pair">
+      <div class="th-col">
+        <img src="images/thresholds-2025/09.jpg" alt="EndoCast" loading="lazy">
+        <div class="caption"><h2>EndoCast</h2><p>Jesmonite</p></div>
+      </div>
+      <div class="th-col th-col-narrow">
+        <img src="images/thresholds-2025/10.jpg" alt="Cast Form #1" loading="lazy">
+        <div class="caption"><h2>Cast Form #1</h2><p>Jesmonite</p></div>
+        <img src="images/thresholds-2025/11.jpg" alt="Cast Form #2" loading="lazy">
+        <div class="caption"><h2>Cast Form #2</h2><p>Jesmonite</p></div>
+      </div>
     </section>
   </main>
 </div>
@@ -72,12 +68,5 @@
     <a href="https://instagram.com/elaineodeaart/" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
-<script>
-document.querySelectorAll('.slider-wrap').forEach(function(w){
-  var s=w.querySelector('.slider');
-  w.querySelector('.prev').onclick=function(){s.scrollBy({left:-s.clientWidth*0.8,behavior:'smooth'});};
-  w.querySelector('.next').onclick=function(){s.scrollBy({left:s.clientWidth*0.8,behavior:'smooth'});};
-});
-</script>
 </body>
 </html>
