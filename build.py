@@ -5,6 +5,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 PAGES = [
     ("index", "Home"),
     ("bio", "Bio"),
+    ("ambit-2025", "Ambit 2025"),
     ("thresholds-2025", "Thresholds 2025"),
     ("ncad-works-2023", "NCAD Works 2023"),
     ("continuum-2022", "Continuum 2022"),
@@ -140,6 +141,11 @@ bio_body = """    <div class="page-head">
         <li>Fire Station Artist&rsquo;s Studio Sculpture Bursary Award, 2020</li>
       </ul>
 
+      <h2>Press</h2>
+      <ul>
+        <li>File Note IV, Fire Station Artist&rsquo;s Studio publication, 2021</li>
+      </ul>
+
       <h2>Group Exhibitions</h2>
       <ul>
         <li class="edu"><span class="ex-year">2025</span>AMBIT<br>Signal Arts Centre, Bray, Co. Wicklow<br><br>Thresholds<br>Seamus Ennis Arts Centre, Naul, Co. Dublin</li>
@@ -157,6 +163,16 @@ open(os.path.join(ROOT, "bio.html"), "w").write(
 
 # ---------- GALLERY PAGES ----------
 galleries = {
+    "ambit-2025": dict(
+        heading="Ambit 2025", sub=["Signal Arts Centre"],
+        sections=[
+            ("", [], [1]),
+            ("Digitus", ["Jesmonite, Copper"], [2]),
+            ("Cor", ["Jesmonite, Mild Steel, Copper"], [3]),
+            ("Ossis", ["Jesmonite, Copper"], [4]),
+            ("Vesica", ["Jesmonite, Copper"], [5]),
+        ],
+    ),
     "thresholds-2025": dict(
         heading="Thresholds 2025", sub=["The Seamus Ennis Arts Centre"], slider=[1, 2, 3, 10, 11],
         sections=[
