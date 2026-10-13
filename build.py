@@ -84,13 +84,20 @@ def slider_html(slug, indices, alt):
       <button class="slider-btn next" aria-label="Next">&rsaquo;</button>
     </div>"""
 
-def work_sections_html(slug, sections):
+def work_sections_html(slug, sections, captions_below=False):
     out = []
     for title, materials, indices in sections:
         head = f"<h2>{title}</h2>" if title else ""
         mats = "".join(f"<p>{m}</p>" for m in materials)
         imgs = "\n      ".join(img(slug, i, title or slug) for i in indices)
-        out.append(f"""    <section class="work">
+        if captions_below:
+            cap = f'<div class="caption">{head}{mats}</div>' if (head or mats) else ""
+            out.append(f"""    <section class="work captions-below">
+      {imgs}
+      {cap}
+    </section>""")
+        else:
+            out.append(f"""    <section class="work">
       {head}{mats}
       {imgs}
     </section>""")
@@ -164,7 +171,7 @@ open(os.path.join(ROOT, "bio.html"), "w").write(
 # ---------- GALLERY PAGES ----------
 galleries = {
     "ambit-2025": dict(
-        heading="Ambit 2025", sub=["Signal Arts Centre"],
+        heading="Ambit 2025", sub=["Signal Arts Centre"], captions_below=True,
         sections=[
             ("", [], [1]),
             ("Digitus", ["Jesmonite, Copper"], [2]),
@@ -242,7 +249,7 @@ for slug, nav_label in PAGES:
     body = "\n".join(p for p in [
         page_head(g["heading"], g.get("sub", ())),
         slider_html(slug, g.get("slider"), g["heading"]),
-        work_sections_html(slug, g["sections"]),
+        work_sections_html(slug, g["sections"], g.get("captions_below", False)),
     ] if p)
     desc = f"{nav_label} &mdash; sculpture by Elaine O'Dea."
     open(os.path.join(ROOT, f"{slug}.html"), "w").write(

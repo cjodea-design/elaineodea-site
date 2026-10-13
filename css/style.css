@@ -190,6 +190,8 @@ main{
   margin-top:20px;
 }
 .work img + img{margin-top:24px;}
+.work.captions-below img{margin-top:0;}
+.work.captions-below .caption{margin-top:14px;}
 
 /* ---- Home hero ---- */
 .hero{
