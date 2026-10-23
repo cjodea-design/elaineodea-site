@@ -233,8 +233,10 @@ a.photo:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
 
 /* ---- Home hero ---- */
 .hero{padding:95px 0 64px;}
+.hero .photo{max-width:50%;}
 @media (max-width: 780px){
   .hero{padding:16px 0 40px;}
+  .hero .photo{max-width:100%;}
 }
 
 /* ---- Bio page ---- */
