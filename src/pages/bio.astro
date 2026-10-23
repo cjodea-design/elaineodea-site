@@ -1,0 +1,73 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const bio = await getEntry('pages', 'bio');
+if (!bio) throw new Error('src/content/pages/bio.md is missing');
+const { Content } = await render(bio);
+const { education = [], awards = [], press = [], exhibitions = [] } = bio.data;
+
+// Group the exhibition CV by year, keeping the order in the file.
+const byYear: { year: string; items: typeof exhibitions }[] = [];
+for (const ex of exhibitions) {
+  const g = byYear.find((y) => y.year === ex.year);
+  g ? g.items.push(ex) : byYear.push({ year: ex.year, items: [ex] });
+}
+---
+
+<Base title="Bio" description="Biography, education and exhibition history for artist Elaine O'Dea.">
+  <div class="page-head"><h1>Bio</h1></div>
+  <div class="bio">
+    <Content />
+
+    {education.length > 0 && (
+      <>
+        <h2>Education</h2>
+        <ul>
+          {education.map((e) => (
+            <li class="edu">
+              <span>{e.qualification}</span>
+              {e.note && <span>{e.note}</span>}
+              <span>{e.institution}</span>
+              <span>{e.years}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {awards.length > 0 && (
+      <>
+        <h2>Awards</h2>
+        <ul>{awards.map((a) => <li>{a.title}, {a.year}</li>)}</ul>
+      </>
+    )}
+
+    {press.length > 0 && (
+      <>
+        <h2>Press</h2>
+        <ul>{press.map((p) => <li>{p.title}, {p.year}</li>)}</ul>
+      </>
+    )}
+
+    {byYear.length > 0 && (
+      <>
+        <h2>Group Exhibitions</h2>
+        <ul>
+          {byYear.map((y) => (
+            <li class="edu">
+              <span class="ex-year">{y.year}</span>
+              {y.items.map((ex, i) => (
+                <>
+                  {i > 0 && <br />}
+                  <span>{ex.title}</span>
+                  <span>{ex.venue}</span>
+                </>
+              ))}
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </div>
+</Base>

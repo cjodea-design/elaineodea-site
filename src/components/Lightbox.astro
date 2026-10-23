@@ -1,0 +1,41 @@
+---
+/**
+ * Full-screen viewer for photos. Any <a data-lightbox href="…"> opens its
+ * href in the dialog. Works across view-transition navigations because it
+ * re-binds on every astro:page-load.
+ */
+---
+
+<dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+  <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+  <img alt="" />
+</dialog>
+
+<script>
+  function bindLightbox() {
+    const dlg = document.getElementById('lightbox') as HTMLDialogElement | null;
+    if (!dlg) return;
+    const img = dlg.querySelector('img') as HTMLImageElement;
+
+    document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]').forEach((a) => {
+      if (a.dataset.bound) return;
+      a.dataset.bound = '1';
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        img.src = a.href;
+        img.alt = a.querySelector('img')?.alt ?? '';
+        dlg.showModal();
+      });
+    });
+
+    if (!dlg.dataset.bound) {
+      dlg.dataset.bound = '1';
+      dlg.addEventListener('click', (e) => {
+        const t = e.target as HTMLElement;
+        if (t === dlg || t.classList.contains('lightbox-close')) dlg.close();
+      });
+      dlg.addEventListener('close', () => { img.removeAttribute('src'); });
+    }
+  }
+  document.addEventListener('astro:page-load', bindLightbox);
+</script>

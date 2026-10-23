@@ -1,0 +1,20 @@
+---
+interface Props {
+  title?: string;
+  materials?: string;
+  dimensions?: string;
+  class?: string;
+}
+const { title, materials, dimensions, class: cls } = Astro.props;
+const empty = !title && !materials && !dimensions;
+---
+
+{
+  !empty && (
+    <div class:list={['caption', cls]}>
+      {title && <h2>{title}</h2>}
+      {materials && <p>{materials}</p>}
+      {dimensions && <p>{dimensions}</p>}
+    </div>
+  )
+}
