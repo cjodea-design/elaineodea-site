@@ -81,16 +81,34 @@ a{color:inherit;}
 
 .nav-toggle{
   display:none;
-  font-family:var(--din);
-  font-weight:300;
-  font-size:15px;
-  color:var(--ink);
+  width:44px;
+  height:44px;
+  padding:0;
   background:none;
-  border:1px solid var(--line);
-  border-radius:3px;
-  padding:8px 14px;
+  border:0;
   cursor:pointer;
+  align-items:center;
+  justify-content:center;
 }
+.nav-toggle-bars{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  width:24px;
+  height:16px;
+}
+.nav-toggle-bars span{
+  display:block;
+  height:2px;
+  background:var(--ink);
+  border-radius:1px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+/* bars become an X while the menu is open */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2){opacity:0;}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
 
 nav.site-nav{
   display:flex;
@@ -98,7 +116,7 @@ nav.site-nav{
   gap:8px;
 }
 @media (max-width: 780px){
-  .nav-toggle{display:inline-block;}
+  .nav-toggle{display:inline-flex;}
   nav.site-nav{
     grid-column:1 / -1;
     display:none;
