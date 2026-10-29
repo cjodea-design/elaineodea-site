@@ -1,0 +1,79 @@
+---
+/**
+ * Renders an exhibition's works in one of four layout presets:
+ *   stacked         caption above each work's photos (the default)
+ *   captions-below  photos first, caption beneath
+ *   grid            multi-photo works shown as a uniform thumbnail grid
+ *   feature         first work as a hero with its caption alongside; any
+ *                   work with 3+ photos as a grid; the rest in two columns
+ */
+import Photo from './Photo.astro';
+import Caption from './Caption.astro';
+
+type Work = { title?: string; materials?: string; dimensions?: string; images: string[] };
+interface Props {
+  layout: 'stacked' | 'captions-below' | 'grid' | 'feature';
+  works: Work[];
+  heading: string;
+}
+const { layout, works, heading } = Astro.props;
+const alt = (w: Work) => w.title ?? heading;
+
+const hero = works[0];
+const rest = works.slice(1);
+const gridWorks = rest.filter((w) => w.images.length >= 3);
+const others = rest.filter((w) => w.images.length < 3);
+---
+
+{
+  layout === 'feature' && hero ? (
+    <>
+      <section class="feature-hero">
+        {hero.images[0] && <Photo src={hero.images[0]} alt={alt(hero)} loading="eager" sizes="(max-width: 780px) 100vw, 500px" />}
+        <Caption {...hero} />
+      </section>
+      {gridWorks.map((w) => (
+        <section class="feature-grid">
+          <div class="thumb-grid">
+            {w.images.map((src) => (
+              <Photo src={src} alt={alt(w)} sizes="(max-width: 780px) 50vw, 320px" widths={[320, 480, 800]} />
+            ))}
+          </div>
+          <Caption {...w} />
+        </section>
+      ))}
+      {others.length > 0 && (
+        <section class="feature-pair">
+          <div class="feature-col">
+            {others[0].images.map((src) => <Photo src={src} alt={alt(others[0])} sizes="(max-width: 780px) 100vw, 560px" />)}
+            <Caption {...others[0]} />
+          </div>
+          <div class="feature-col feature-col-narrow">
+            {others.slice(1).map((w) => (
+              <div class="feature-item">
+                {w.images.map((src) => <Photo src={src} alt={alt(w)} sizes="(max-width: 780px) 100vw, 360px" />)}
+                <Caption {...w} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
+  ) : (
+    works.map((w, i) => (
+      <section class:list={['work', `work-${layout}`]}>
+        {layout !== 'captions-below' && <Caption {...w} />}
+        {layout === 'grid' && w.images.length > 1 ? (
+          <div class="thumb-grid">
+            {w.images.map((src) => (
+              <Photo src={src} alt={alt(w)} sizes="(max-width: 780px) 50vw, 320px" widths={[320, 480, 800]} />
+            ))}
+          </div>
+        ) : (
+          w.images.map((src, j) => <Photo src={src} alt={alt(w)} loading={i === 0 && j === 0 ? 'eager' : 'lazy'} />)
+        )}
+        {layout === 'captions-below' && <Caption {...w} />}
+      </section>
+    ))
+  )
+}

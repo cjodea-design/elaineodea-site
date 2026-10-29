@@ -1,0 +1,15 @@
+// Cloudflare Workers configuration.
+// `npx wrangler deploy` (the deploy command in the Cloudflare dashboard) reads
+// this file: it uploads the folder Astro builds into (dist/) as the Worker's
+// static assets. The name must match the Worker in the dashboard so the
+// deploy lands on the same Worker that elaineodea.com is attached to.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "elaineodea-site",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

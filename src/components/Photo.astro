@@ -1,0 +1,45 @@
+---
+/**
+ * A responsive, build-time-optimised photo. Pass the content-file path
+ * ("/src/images/...") and it resolves to an asset, emits a srcset of
+ * WebP renditions, and (by default) wraps the image in a link that the
+ * lightbox opens full-size.
+ */
+import { Image, getImage } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  src: string;
+  alt?: string;
+  sizes?: string;
+  widths?: number[];
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  lightbox?: boolean;
+}
+
+const {
+  src,
+  alt = '',
+  sizes = '(max-width: 780px) 100vw, 900px',
+  widths = [480, 800, 1200, 1600],
+  class: cls,
+  loading = 'lazy',
+  lightbox = true,
+} = Astro.props;
+
+const meta = await resolveImage(src);
+// Never ask for renditions wider than the source; always include the source width.
+const useWidths = Array.from(new Set([...widths.filter((w) => w < meta.width), meta.width])).sort((a, b) => a - b);
+const full = lightbox ? await getImage({ src: meta, width: Math.min(1800, meta.width), format: 'webp' }) : null;
+---
+
+{
+  full ? (
+    <a href={full.src} class:list={['photo', cls]} data-lightbox>
+      <Image src={meta} alt={alt} widths={useWidths} sizes={sizes} format="webp" loading={loading} />
+    </a>
+  ) : (
+    <Image src={meta} alt={alt} widths={useWidths} sizes={sizes} format="webp" loading={loading} class:list={['photo', cls]} />
+  )
+}

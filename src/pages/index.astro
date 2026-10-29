@@ -1,0 +1,15 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+
+const home = await getEntry('pages', 'home');
+---
+
+<Base>
+  <div class="hero">
+    {home?.data.heroImage && (
+      <Photo src={home.data.heroImage} alt={home.data.heroAlt ?? ''} loading="eager" lightbox={false} sizes="(max-width: 780px) 100vw, 900px" />
+    )}
+  </div>
+</Base>

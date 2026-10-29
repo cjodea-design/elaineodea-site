@@ -1,0 +1,153 @@
+# Pages CMS configuration — https://pagescms.org
+# Describes the editing forms for the site. Edit at https://app.pagescms.org
+# after installing the Pages CMS GitHub app on this repository.
+
+media:
+  input: src/images
+  output: /src/images
+  extensions: [jpg, jpeg, png, webp]
+  categories: [image]
+
+content:
+  - name: exhibitions
+    label: Exhibitions
+    description: One entry per exhibition or body of work. Newest date appears first in the site navigation.
+    type: collection
+    path: src/content/exhibitions
+    filename: "{fields.title}-{fields.year}.md"
+    view:
+      primary: title
+      fields: [title, year, venue, layout]
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: Short name used in the navigation (the year is added automatically).
+      - name: year
+        label: Year
+        type: number
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        description: Only used for ordering — newest first. Any date in the right month is fine.
+      - name: heading
+        label: Page heading (optional)
+        type: string
+        description: Leave blank to use "Title Year". Fill in when the page should say something different, e.g. "NCAD Grad Show 2019".
+      - name: subtitle
+        label: Subtitle line (optional)
+        type: string
+      - name: venue
+        label: Venue
+        type: string
+      - name: layout
+        label: Layout
+        type: select
+        default: stacked
+        options:
+          values:
+            - value: stacked
+              label: Stacked — caption above each work's photos
+            - value: captions-below
+              label: Stacked — caption below each work's photos
+            - value: grid
+              label: Grid — works with several photos shown as a thumbnail grid
+            - value: feature
+              label: Feature — first work as a large hero, a series as a grid, the rest in two columns
+      - name: works
+        label: Works
+        type: object
+        list: true
+        description: Add one entry per piece. A first entry with photos but no title works well as an installation view.
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: materials
+            label: Materials
+            type: string
+          - name: dimensions
+            label: Dimensions
+            type: string
+          - name: images
+            label: Photos
+            type: image
+            list: true
+
+  - name: bio
+    label: Bio
+    type: file
+    path: src/content/pages/bio.md
+    fields:
+      - name: title
+        type: string
+        hidden: true
+        default: Bio
+      - name: body
+        label: Biography
+        type: rich-text
+      - name: education
+        label: Education
+        type: object
+        list: true
+        fields:
+          - { name: qualification, label: Qualification, type: string }
+          - { name: note, label: Note (optional), type: string }
+          - { name: institution, label: Institution, type: string }
+          - { name: years, label: Years, type: string }
+      - name: awards
+        label: Awards
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Award, type: string }
+          - { name: year, label: Year, type: string }
+      - name: press
+        label: Press
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Publication, type: string }
+          - { name: year, label: Year, type: string }
+      - name: exhibitions
+        label: Group exhibitions
+        type: object
+        list: true
+        fields:
+          - { name: year, label: Year, type: string }
+          - { name: title, label: Exhibition, type: string }
+          - { name: venue, label: Venue, type: string }
+
+  - name: home
+    label: Home page
+    type: file
+    path: src/content/pages/home.md
+    fields:
+      - name: title
+        type: string
+        hidden: true
+        default: Home
+      - name: heroImage
+        label: Home page photo
+        type: image
+      - name: heroAlt
+        label: Photo description (for accessibility)
+        type: string
+
+  - name: settings
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    fields:
+      - { name: name, label: Site name, type: string }
+      - { name: nameLines, label: Name as shown in the sidebar (one line per entry), type: string, list: true }
+      - { name: description, label: Site description (for search engines), type: string }
+      - { name: footer, label: Footer text, type: string }
+      - { name: instagram, label: Instagram URL, type: string }

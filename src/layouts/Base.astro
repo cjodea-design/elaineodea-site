@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import { ClientRouter } from 'astro:transitions';
+import site from '../data/site.json';
+import Lightbox from '../components/Lightbox.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : site.name;
+
+const exhibitions = (await getCollection('exhibitions')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/bio/', label: 'Bio' },
+  ...exhibitions.map((e) => ({ href: `/${e.id}/`, label: `${e.data.title} ${e.data.year}` })),
+];
+const here = Astro.url.pathname.replace(/\/?$/, '/');
+const isActive = (href: string) => href === here || (href === '/' && here === '/');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&family=Barlow:wght@300;400&display=swap"
+    />
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="site-name" href="/" set:html={site.nameLines.join('<br> ')} />
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+          <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+        <nav class="site-nav" id="site-nav">
+          {nav.map((n) => (
+            <a href={n.href} class:list={{ active: isActive(n.href) }} aria-current={isActive(n.href) ? 'page' : undefined}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+      </aside>
+      <main>
+        <slot />
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <span>{site.footer}</span>
+        <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </footer>
+    <Lightbox />
+    <script>
+      // Mobile nav toggle; re-bound after every view-transition navigation.
+      document.addEventListener('astro:page-load', () => {
+        const btn = document.querySelector<HTMLButtonElement>('.nav-toggle');
+        const nav = document.getElementById('site-nav');
+        if (!btn || !nav || btn.dataset.bound) return;
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', () => {
+          const open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+      });
+    </script>
+  </body>
+</html>
