@@ -62,6 +62,8 @@ src/styles/global.css      all styling
 
 ## Deploying
 
-Cloudflare Workers builds the site from the `master` branch on every push:
-build command `npm run build`, output directory `dist`. Old `*.html` URLs
-from the first version of the site redirect to their new addresses.
+Cloudflare Workers builds the site from the `master` branch on every push.
+In the dashboard the build command is `npm run build` and the deploy command
+is `npx wrangler deploy`; the output folder (`dist/`) is declared in
+`wrangler.jsonc`, not in the dashboard. Old `*.html` URLs from the first
+version of the site are redirected in `public/_redirects`.

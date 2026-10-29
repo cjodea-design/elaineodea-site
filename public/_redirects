@@ -1,0 +1,15 @@
+# Old flat-file URLs from the first static build -> their Astro addresses.
+# (Astro also emits fallback pages for these; this gives proper 301s.)
+/index.html                      /                              301
+/bio.html                        /bio/                          301
+/ambit-2025.html                 /ambit-2025/                   301
+/thresholds-2025.html            /thresholds-2025/              301
+/ncad-works-2023.html            /ncad-works-2023/              301
+/continuum-2022.html             /continuum-2022/               301
+/subjective-objects-2022.html    /subjective-objects-2022/      301
+/if-walls-could-talk-2021.html   /if-walls-could-talk-2021/     301
+/fragility-2020.html             /fragility-2020/               301
+/ncad-works-2019.html            /ncad-works-2019/              301
+/sculpture-in-context-2019.html  /sculpture-in-context-2019/    301
+/colour-is-dangerous-2018.html   /colour-is-dangerous-2018/     301
+/gentle-persuasion-2018.html     /gentle-persuasion-2018/       301
